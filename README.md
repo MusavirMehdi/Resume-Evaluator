@@ -1,24 +1,28 @@
-# ResumeParser
+# Resume-Evaluator
+Upload several resumes and enter the job description. The Python program extracts text from each resume. It sends the text to an LLM through the Groq service.  The program uses Pydantic to structure the LLM output. It compares each resume with the job description and gives it a score. It then shows the two highest scores and the two lowest scores.
 
-Screen the PDF and DOCX resumes in `resume/` against the sample **Entry-Level Data Analyst** job description in `evaluator.py`.
+Sample Output Example -:
 
-## Run
+Processing: Alex_Sample_Resume.pdf
+Score: 25.0
 
-From this directory:
+Processing: Jordan_Example_Resume.docx
+Score: 42.0
 
-```powershell
-uv sync
-uv run evaluator.py
-```
+Processing: Sam_Placeholder_Resume.docx
+Score: 45.0
 
-The evaluator prints JSON with each resume's match percentage, score breakdown, matched and missing skills, and any extraction errors. Results are ranked by score.
+Processing: Taylor_Demo_Resume.pdf
+Score: 30.0
 
-## Sample screening criteria
+TOP 2 CANDIDATES
+Sam Placeholder - 45.0 %
+{'candidate_name': 'Sam Placeholder', 'matching_skills': ['Java', 'Object-oriented design'], 'missing_important_skills': ['Python', 'C++', 'C#', 'Go', 'Rust', 'TypeScript', 'Data structures', 'Algorithms'], 'experience_requirement_met': True, 'overall_match_percentage': 45, 'final_verdict': 'Partial fit; core required skills are weak, but strong project experience and many preferred skills. Needs to improve on key languages and fundamentals.'}
+Jordan Example - 42.0 %
+{'name': 'Jordan Example', 'matching_skills': ['C++', 'Python'], 'missing_important_skills': ['Java', 'C#', 'Go', 'Rust', 'TypeScript', 'Data structures', 'Algorithms', 'Object-oriented design'], 'experience_requirement_met': True, 'overall_match_percentage': 42, 'verdict': 'Partial fit: core programming languages present and education aligns, but many required technical skills and preferred cloud/DevOps experience are missing.'}
 
-- **Required skills (45%)**: SQL, Excel, Python, data visualization, and statistics.
-- **Preferred skills (25%)**: pandas, NumPy, Power BI, Tableau, and PostgreSQL.
-- **Education (15%)**: relevant bachelor's degree or equivalent coursework.
-- **Relevant experience (10%)**: at least one year, an internship, or a substantial academic project.
-- **Responsibilities (5%)**: evidence of data cleaning, analysis, reporting, and communicating insights.
-
-This is a local, keyword-based screening aid: resume contents are not sent to an external API. Keyword matching can miss equivalent wording and cannot verify claims, so review the original resumes and do not use the score as the sole basis for a hiring decision. Scanned PDFs without selectable text are reported as extraction errors.
+LOWEST 2 CANDIDATES
+Taylor Demo - 30.0 %
+{'candidate_name': 'Taylor Demo', 'matching_skills': ['C++', 'Python', 'Data Structures and Algorithms'], 'missing_important_skills': ['Java', 'C#', 'Go', 'Rust', 'TypeScript', 'Object-oriented design'], 'experience_requirement_met': True, 'overall_match_percentage': 30, 'final_verdict': 'Candidate meets basic requirements but lacks many core required skills; overall fit is low.'}
+Alex Sample - 25.0 %
+{'candidate_name': 'Alex Sample', 'matching_skills': ['C++', 'Data Structures', 'Algorithms', 'SQL', 'Git/GitHub'], 'missing_important_skills': ['Java', 'Python', 'C#', 'Go', 'Rust', 'TypeScript', 'Object-oriented design'], 'experience_requirement_met': True, 'overall_match_percentage': 25, 'final_verdict': 'Partial fit; strong front-end experience but lacks core required programming languages and many preferred cloud/AI skills.'}
