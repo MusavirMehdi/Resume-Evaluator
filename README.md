@@ -21,7 +21,7 @@ The project can be run as a command-line program or as a Streamlit web app. It s
 4. The LLM compares each resume with the structured job description and returns a score and details.
 5. The CLI prints the results, while the web app displays a ranked table and expandable candidate details.
 
-For the Streamlit app, uploaded files are handled in memory and are not saved by the app. Their extracted text and 
+For the Streamlit app, uploaded files are handled in memory and are not saved by the app.
 
 # Current constraints
 
